@@ -77,6 +77,7 @@
  */
 
 cc.game.onStart = function(){
+    cc.log("Start");
     cc.view.enableRetina(false);
     cc.view.adjustViewPort(true);
     cc.view.setDesignResolutionSize(480,720,cc.ResolutionPolicy.SHOW_ALL);
