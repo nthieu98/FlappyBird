@@ -10,7 +10,8 @@
 
     "jsList" : [
         "src/GameLayer.js",
-        "src/Resource.js"
+        "src/Resource.js",
+        "src/Pipe.js"
 
     ]
 }
