@@ -6,6 +6,7 @@ var GameLayer = cc.Layer.extend({
     _bird: null,
     timeSpawn: 3,
     gameover: false,
+    gamestatus: 'waiting',
     score: 0,
     scoreLabel: null,
     base: null,
@@ -20,21 +21,22 @@ var GameLayer = cc.Layer.extend({
         cc.log("Init");
 
 
-        this._bird = new cc.Sprite(res.bluebird_midflap, cc.rect(0, 0, 34, 24));
-        this._bird.attr({
-            anchorX: 0,
-            anchorY: 0,
-            x: winSize.width / 2,
-            y: winSize.height / 2,
-            scale: 1.5
-        })
+        //this._bird = new cc.Sprite(res.bluebird_midflap, cc.rect(0, 0, 34, 24));
+        //this._bird.attr({
+        //    anchorX: 0,
+        //    anchorY: 0,
+        //    x: winSize.width / 2,
+        //    y: winSize.height / 2,
+        //    scale: 1.5
+        //})
+        this._bird = new Bird();
 
         this.addChild(this._bird, 3);
         this.initBackGround();
         this.addKeyboardListener();
 
         var st = this.score.toString();
-        this.scoreLabel = new cc.LabelTTF(st, "Arial", 48);
+        this.scoreLabel = new cc.LabelBMFont(st, "res/fonts/flappyBird.fnt");
         this.scoreLabel.attr({
             anchorX: 0,
             anchorY: 0,
@@ -73,19 +75,21 @@ var GameLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function(key, event){
-                cc.log(key);
-                if(key == 32) {
+                //cc.log(key);
+                if(key == 32 && self.gamestatus == 'gameover') {
                     //self._bird.x += 10;
-                    self._bird.y += 60;
+                    self.restart();
                 }
             }
         }, this);
     },
 
     update: function(dt){
+        if(this.gamestatus != 'playing')
+            return;
         this.timeSpawn -= dt ;
         //cc.log(this.timeSpawn);
-        this._bird.y -= dt * 100;
+        //this._bird.y -= dt * 100;
         var st = this.score.toString();
         this.scoreLabel.setString(st);
         if(this.checkCollision(this.base, this._bird)){
@@ -112,7 +116,6 @@ var GameLayer = cc.Layer.extend({
             //cc.log("collision");
             return true;
         }
-
         //cc.log("non-collision");
         return false;
     },
@@ -130,7 +133,10 @@ var GameLayer = cc.Layer.extend({
         return false;
     },
     gameOver: function(){
-        this.gameover = true;
+        //this.gameover = true;
+        this.gamestatus = 'gameover';
+        this.);
+        //cc.log(this.gamestatus);
         this.unscheduleUpdate();
         var gameover = new cc.Sprite(res.gameOver);
         gameover.attr({
@@ -140,9 +146,15 @@ var GameLayer = cc.Layer.extend({
             y: winSize.height / 2
         })
         this.addChild(gameover, 2);
+        //this.addKeyboardListener();
 
+    },
+    restart:function() {
+
+        if (this.gamestatus == 'gameover') {
+            cc.director.runScene(GameLayer.scene());
+        }
     }
-
 });
 
 GameLayer.scene = function(){

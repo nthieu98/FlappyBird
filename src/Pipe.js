@@ -28,13 +28,13 @@ var Pipe = cc.Sprite.extend({
             });
         }
         this.scheduleUpdate();
-        this.scheduleUpdate()
+        //this.scheduleUpdate()
     },
 
     update : function (dt) {
         this.x -= 100 * dt;
 
-        if(this.parent.gameover == true){
+        if(this.parent.gamestatus == 'gameover'){
             this.unscheduleUpdate();
         }
 

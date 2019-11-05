@@ -11,6 +11,7 @@
     "jsList" : [
         "src/GameLayer.js",
         "src/Resource.js",
+        "src/Bird.js",
         "src/Pipe.js"
 
     ]

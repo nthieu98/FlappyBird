@@ -19,6 +19,12 @@ var res = {
     bluebird_downflap: "res/bluebird-downflap.png",
     bluebird_midflap: "res/bluebird-midflap.png",
     bluebird_upflap: "res/bluebird-upflap.png",
+    yellowbird_downflap: "res/yellowbird-downflap.png",
+    yellowbird_midflap: "res/yellowbird-midflap.png",
+    yellowbird_upflap: "res/yellowbird-upflap.png",
+    redbird_downflap: "res/redbird-downflap.png",
+    redbird_midflap: "res/redbird-midflap.png",
+    redbird_upflap: "res/redbird-upflap.png",
     pipe_green: "res/pipe-green.png",
     pipe_red: "res/pipe-red.png",
     gameOver: "res/gameOver.png"
